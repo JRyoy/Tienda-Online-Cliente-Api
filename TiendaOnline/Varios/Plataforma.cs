@@ -5,10 +5,11 @@ public class Plataforma
     public string textoBusqueda { get; set; }
     public int FiltMayor { get; set; }
     public int FiltMenor { get; set; }
-    List<Cliente> Cuentas { get; set; }
-    List<Producto> productos { get; set; }
-    List<Vendedor> Vendedores { get; set; }
-    List<Producto> productosEncontrados { get; set; }
+    public List<Cliente> Cuentas { get; set; }
+    public List<Producto> Productos { get; set; }
+    public List<Vendedor> Vendedores { get; set; }
+    public List<Producto> ProductosEncontrados { get; set;}
+    public List<Categoria> Categorias{get; set;}
 
     public Plataforma(string textoBusqueda, int FiltMayor, int FiltMenor)
     {
@@ -19,11 +20,13 @@ public class Plataforma
         Validacion.ValidacionValor(FiltMenor, "El filtro tiene que ser mayor a 0");
         this.FiltMenor = FiltMenor;
         this.Cuentas = new List<Cliente>();
-        this.productos = new List<Producto>();
+        this.Productos = new List<Producto>();
         this.Vendedores = new List<Vendedor>();
-        this.productosEncontrados = new List<Producto>();
+        this.ProductosEncontrados = new List<Producto>();
+        this.Categorias=new List<Categoria>();
 
     }
+    public void AgregarCategoria(Categoria categoria)=>Categorias.Add(categoria);
 
     public void AgregarCuenta(Cliente Cuenta)
     {
@@ -67,14 +70,14 @@ public class Plataforma
                 if (producto.Precio >= FiltMayor && producto.Precio <= FiltMenor &&
                         (producto.Nombre.Contains(textoBusqueda) ||
                             producto.Descripcion.Contains(textoBusqueda) ||
-                                producto.Categoria.Contains(textoBusqueda)))
+                                producto.categoria.Contains(textoBusqueda)))
                 {
-                    productosEncontrados.Add(producto);
+                    ProductosEncontrados.Add(producto);
                 }
 
             }
         }
-        return productosEncontrados;
+        return ProductosEncontrados;
     }
     public List<Producto> BuscarProductosPorTextoLibre()
     {
@@ -85,14 +88,14 @@ public class Plataforma
             {
                 if ((producto.Nombre.Contains(textoBusqueda) ||
                         producto.Descripcion.Contains(textoBusqueda) ||
-                            producto.Categoria.Contains(textoBusqueda)))
+                            producto.categoria.Contains(textoBusqueda)))
                 {
-                    productosEncontrados.Add(producto);
+                    ProductosEncontrados.Add(producto);
                 }
 
             }
         }
-        return productosEncontrados;
+        return ProductosEncontrados;
     }
 }
 
