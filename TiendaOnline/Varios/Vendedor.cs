@@ -12,11 +12,12 @@ public class Vendedor
     public List<Producto>Productos{ get; set; } = new List<Producto>();
     public Vendedor (Guid Id,string Nombre, string Apellido,string Email,string Apodo,string Password)
     {
+        this.Id= Guid.NewGuid();
         Validacion.ValidacionCadena(Nombre,"error Nombre");
         this.Nombre=Nombre;
         Validacion.ValidacionCadena(Apellido,"error Apllido");
         this.Apellido= Apellido;
-        Validacion.ValidacionCadena(Email,"error Email");
+        Validacion.ValidarEmail(Email,"error Email");
         this.Email= Email;
         Validacion.ValidacionCadena(Password,"error Contraseña");
         this.Password=Password;
