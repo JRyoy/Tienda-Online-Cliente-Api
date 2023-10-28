@@ -8,8 +8,8 @@ public class Plataforma
     public List<Cliente> Cuentas { get; set; }
     public List<Producto> Productos { get; set; }
     public List<Vendedor> Vendedores { get; set; }
-    public List<Producto> ProductosEncontrados { get; set;}
-    public List<Categoria> Categorias{get; set;}
+    public List<Producto> ProductosEncontrados { get; set; }
+    public List<Categoria> Categorias { get; set; }
 
     public Plataforma(string textoBusqueda, int FiltMayor, int FiltMenor)
     {
@@ -23,10 +23,10 @@ public class Plataforma
         this.Productos = new List<Producto>();
         this.Vendedores = new List<Vendedor>();
         this.ProductosEncontrados = new List<Producto>();
-        this.Categorias=new List<Categoria>();
+        this.Categorias = new List<Categoria>();
 
     }
-    public void AgregarCategoria(Categoria categoria)=>Categorias.Add(categoria);
+    public void AgregarCategoria(Categoria categoria) => Categorias.Add(categoria);
 
     public void AgregarCuenta(Cliente Cuenta)
     {
@@ -70,7 +70,7 @@ public class Plataforma
                 if (producto.Precio >= FiltMayor && producto.Precio <= FiltMenor &&
                         (producto.Nombre.Contains(textoBusqueda) ||
                             producto.Descripcion.Contains(textoBusqueda) ||
-                                producto.categoria.Contains(textoBusqueda)))
+                                producto.categoria.Nombre.Contains(textoBusqueda)))
                 {
                     ProductosEncontrados.Add(producto);
                 }
@@ -86,9 +86,9 @@ public class Plataforma
         {
             foreach (var producto in vendedor.Productos)
             {
-                if ((producto.Nombre.Contains(textoBusqueda) ||
+                if (producto.Nombre.Contains(textoBusqueda) ||
                         producto.Descripcion.Contains(textoBusqueda) ||
-                            producto.categoria.Contains(textoBusqueda)))
+                            producto.categoria.Nombre.Contains(textoBusqueda))
                 {
                     ProductosEncontrados.Add(producto);
                 }
