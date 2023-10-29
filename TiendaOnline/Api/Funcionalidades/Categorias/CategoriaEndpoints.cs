@@ -4,9 +4,9 @@ public static class CategoriaEndpoints
 {
     public static void AddCategoriaEndpoint(this WebApplication app)
     {
-         app.MapGet("api/categoria",(CategoriaService categoriaService)  =>
+         app.MapGet("/api/categoria",(CategoriaService categoriaService)  =>
         {
-            return Results.Ok(categoriaService.GetCategoria);
+            return Results.Ok(categoriaService.GetCategoria());
         });
     }
 }

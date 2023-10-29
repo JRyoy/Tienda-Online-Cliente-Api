@@ -5,9 +5,9 @@ public static class ProductoEndpoints
 {
     public static void AddProductoEndpoints(this WebApplication app)
     {
-        app.MapGet("api/producto",(ProductoService productoService )=>
+        app.MapGet("/api/producto",(ProductoService productoService )=>
         {
-            return Results.Ok(productoService.GetProductos);
+            return Results.Ok(productoService.GetProductos());
         });
     }
 }

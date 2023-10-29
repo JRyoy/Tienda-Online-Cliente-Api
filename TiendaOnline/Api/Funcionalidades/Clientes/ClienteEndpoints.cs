@@ -6,9 +6,9 @@ public static class ClienteEndpoints
 {
     public static void AddClienteEndpoints(this WebApplication app)
     {
-        app.MapGet("api/Cliente",(ClienteService clienteService )=>
+        app.MapGet("/api/Cliente",(ClienteService clienteService )=>
         {
-            return Results.Ok(clienteService.GetClientes);
+            return Results.Ok(clienteService.GetClientes());
         });
     }
 }
