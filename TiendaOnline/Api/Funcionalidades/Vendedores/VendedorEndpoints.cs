@@ -1,15 +1,16 @@
+using Carter;
 using Microsoft.AspNetCore.Mvc;
 using Varios;
 
 namespace Api.Funcionalidades.Vendedores;
 
-public static class VendedorEndpoints
+public  class VendedorEndpoints:ICarterModule
     {
-        public static void AddVendedorEndpoints(this WebApplication app)
-        {
-            app.MapGet("/api/vendedor", ([FromServices]IVendedorService vendedorService) =>
+    public void AddRoutes(IEndpointRouteBuilder app)
+    {
+          app.MapGet("/api/vendedor", ([FromServices]IVendedorService vendedorService) =>
             {
                 return Results.Ok(vendedorService.GetVendedores());
             });
-        }
     }
+}
