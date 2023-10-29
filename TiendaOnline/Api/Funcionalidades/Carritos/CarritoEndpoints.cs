@@ -1,14 +1,16 @@
+using Carter;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Funcionalidades.Carritos;
 
-public static class CarritoEndpoints
+public class CarritoEndpoints : ICarterModule
 {
-    public static void AddCarritoEndpoints(this WebApplication app)
+    public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapGet("/api/Carrito",([FromServices]ICarritoService carritoService)=>
         {
             return Results.Ok(carritoService.GetCarrito());
         });
     }
+
 }

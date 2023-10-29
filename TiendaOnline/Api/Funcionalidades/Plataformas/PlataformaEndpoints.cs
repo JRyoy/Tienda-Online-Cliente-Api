@@ -1,15 +1,17 @@
+using Carter;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Funcionalidades.Plataformas;
 
-public static class PlataformaEndpoints
+public  class PlataformaEndpoints:ICarterModule
 {
-    public static void AddPlataformaEndpoints(this WebApplication app)
+
+
+    public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("/api/producto",([FromServices]IPlataformaService plataformaService)=>
+       app.MapGet("/api/producto",([FromServices]IPlataformaService plataformaService)=>
         {
             return Results.Ok(plataformaService.GetPlataformas());
         });
     }
-
 }

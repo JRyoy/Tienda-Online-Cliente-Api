@@ -1,14 +1,18 @@
+using Carter;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Funcionalidades.Categorias;
 
-public static class CategoriaEndpoints
+public  class CategoriaEndpoints:ICarterModule
 {
-    public static void AddCategoriaEndpoint(this WebApplication app)
+
+
+    public void AddRoutes(IEndpointRouteBuilder app)
     {
          app.MapGet("/api/categoria",([FromServices]ICategoriaService categoriaService)  =>
         {
             return Results.Ok(categoriaService.GetCategoria());
         });
     }
+
 }

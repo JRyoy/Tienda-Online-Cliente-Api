@@ -1,15 +1,18 @@
+using Carter;
 using Microsoft.AspNetCore.Mvc;
 using Varios;
 
 namespace Api.Funcionalidades.Clientes;
 
-public static class ClienteEndpoints
+public class ClienteEndpoints:ICarterModule
 {
-    public static void AddClienteEndpoints(this WebApplication app)
+
+    public void AddRoutes(IEndpointRouteBuilder app)
     {
         app.MapGet("/api/Cliente",([FromServices]IClienteService clienteService )=>
         {
             return Results.Ok(clienteService.GetClientes());
         });
     }
+
 }
