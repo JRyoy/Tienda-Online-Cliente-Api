@@ -1,3 +1,4 @@
+using Api.Funcionalidades;
 using Api.Funcionalidades.Carritos;
 using Api.Funcionalidades.Categorias;
 using Api.Funcionalidades.Clientes;
@@ -15,16 +16,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton< IVendedorService,VendedorService>();
-builder.Services.AddSingleton<IClienteService,ClienteService>();
-builder.Services.AddSingleton<IProductoService,ProductoService>();
-builder.Services.AddSingleton<IPlataformaService,PlataformaService>();
-builder.Services.AddSingleton<ICategoriaService,CategoriaService>();
-builder.Services.AddSingleton<IItemCarritoService,ItemCarritoService>();
-builder.Services.AddSingleton<ICarritoService,CarritoService>();
-
-
-
+builder.Services.AddServiceManager();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
