@@ -1,16 +1,31 @@
-namespace Varios;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
+namespace Varios;
+[Table("Vendedor")]
 public class Vendedor
 {
+   
+   [Key]
+   [Required]
     public Guid Id { get; protected set; } = Guid.NewGuid();
+   [Required] 
+    [StringLength(30)]
     public  string Nombre {get; set;}
+   [Required] 
+    [StringLength(30)]
     public string Apellido {get; set;}
+   [Required] 
+    [StringLength(30)]
     public string Email {get; set;}
+   [Required] 
+    [StringLength(30)]
     public  string Apodo {get; set;}
+   [Required] 
     public string Password{get; set;}
     
     public List<Producto>Productos{ get; set; } = new List<Producto>();
-    public Vendedor (Guid Id,string Nombre, string Apellido,string Email,string Apodo,string Password)
+    public Vendedor (Guid id, string Nombre, string Apellido,string Email,string Apodo,string Password)
     {
         this.Id= Guid.NewGuid();
         Validacion.ValidacionCadena(Nombre,"error Nombre");

@@ -1,13 +1,19 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Varios;
 
 public class Carrito
 {
+    [Key]
+    [Required]
     public Guid Id { get; protected set; } = Guid.NewGuid();
+    [Required]
     public Cliente Cliente { get; set; }
+    [Required]
     public double Total { get; set; }
     List<ItemCarrito> Productos { get; set; }
 
-    public Carrito(Guid Id, Cliente Cliente)
+    public Carrito( Cliente Cliente)
     {
         this.Id = Id;
         this.Cliente = Cliente;
