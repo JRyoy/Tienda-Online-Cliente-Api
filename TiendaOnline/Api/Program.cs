@@ -1,13 +1,7 @@
 using Api.Funcionalidades;
-using Api.Funcionalidades.Carritos;
-using Api.Funcionalidades.Categorias;
-using Api.Funcionalidades.Clientes;
-using Api.Funcionalidades.ItemCarritos;
-using Api.Funcionalidades.Plataformas;
-using Api.Funcionalidades.Productos;
-using Api.Funcionalidades.Vendedores;
-using Varios;
 using Carter;
+using Api.Persistencia;
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,6 +12,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddServiceManager();
 builder.Services.AddCarter();
+var connectionString = builder.Configuration.GetConnectionString("aplicacion_db");
+
+builder.Services.AddDbContext<AplicacionDBContext>(opcion => opcion.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 34))));
+
+var opciones = new DbContextOptionsBuilder<AplicacionDBContext>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -25,13 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-//app.AddVendedorEndpoints();
-//app.AddClienteEndpoints();
-//app.AddProductoEndpoints();
-//app.AddPlataformaEndpoints();
-//app.AddCategoriaEndpoint();
-//app.AddItemCarritoEndpoints();
-//app.AddCarritoEndpoints();
+
 app.MapCarter();
 app.UseHttpsRedirection();
 
