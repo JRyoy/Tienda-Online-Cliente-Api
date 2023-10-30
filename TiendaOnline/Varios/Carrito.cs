@@ -13,7 +13,7 @@ public class Carrito
     public double Total { get; set; }
     List<ItemCarrito> Productos { get; set; }
 
-    public Carrito( Cliente Cliente)
+    public Carrito( Guid Id, Cliente Cliente)
     {
         this.Id = Id;
         this.Cliente = Cliente;

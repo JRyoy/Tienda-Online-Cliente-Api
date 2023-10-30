@@ -9,7 +9,7 @@ public  class PlataformaEndpoints:ICarterModule
 
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-       app.MapGet("/api/producto",([FromServices]IPlataformaService plataformaService)=>
+       app.MapGet("/api/plataforma",([FromServices]IPlataformaService plataformaService)=>
         {
             return Results.Ok(plataformaService.GetPlataformas());
         });

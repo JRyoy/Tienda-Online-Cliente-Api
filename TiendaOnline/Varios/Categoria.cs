@@ -15,7 +15,7 @@ public class Categoria
     public string Descripcion { get; set; }
     List<Producto> Productos { get; set; }
 
-    public Categoria( string Nombre, string Descripcion)
+    public Categoria( Guid Id, string Nombre, string Descripcion)
     {
         this.IdCategoria = IdCategoria;
         this.Nombre = Nombre;

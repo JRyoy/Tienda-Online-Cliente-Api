@@ -21,7 +21,7 @@ public class Producto
     [Required]
     public int CantidadProducto { get; set; }
 
-    public Producto( string Nombre, double Precio, string Descripcion, Categoria categoria)
+    public Producto( Guid Id,string Nombre, double Precio, string Descripcion, Categoria categoria)
     {
 
         this.Id = Id;
