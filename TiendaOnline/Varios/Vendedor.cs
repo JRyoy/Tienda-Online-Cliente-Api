@@ -25,7 +25,7 @@ public class Vendedor
     public string Password{get; set;}
     
     public List<Producto>Productos{ get; set; } = new List<Producto>();
-    public Vendedor (string Nombre, string Apellido,string Email,string Apodo,string Password)
+    public Vendedor (Guid guid, string Nombre, string Apellido,string Email,string Apodo,string Password)
     {
         this.Id= Guid.NewGuid();
         Validacion.ValidacionCadena(Nombre,"error Nombre");
