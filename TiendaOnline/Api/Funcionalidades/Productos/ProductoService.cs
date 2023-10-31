@@ -4,13 +4,14 @@ public interface IProductoService
 {
     List<Producto> GetProductos();
 }
-public  class ProductoService:IProductoService
+public class ProductoService : IProductoService
 {
-    List<Producto>productos;
+    List<Producto> productos;
     public ProductoService()
     {
-        productos=new List<Producto>{
-            new Producto(Guid.NewGuid(), "Peluche de messi", 20, "Peluche messi", Cate);
+        productos = new List<Producto>
+        {
+            //new Producto(Guid.NewGuid(), "Peluche de messi", 20, "Peluche messi", Cate);
         };
     }
 

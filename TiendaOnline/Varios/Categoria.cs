@@ -1,7 +1,8 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Varios;
-
+[Table("Categoria")]
 public class Categoria
 {
     [Key]
@@ -15,9 +16,8 @@ public class Categoria
     public string Descripcion { get; set; }
     List<Producto> Productos { get; set; }
 
-    public Categoria( Guid Id, string Nombre, string Descripcion)
+    public Categoria(string Nombre, string Descripcion)
     {
-        this.IdCategoria = IdCategoria;
         this.Nombre = Nombre;
         this.Descripcion = Descripcion;
         this.Productos = new List<Producto>();

@@ -5,34 +5,30 @@ namespace Varios;
 [Table("Producto")]
 public class Producto
 {
-   [Key]
-   [Required]
-    public Guid Id { get; protected set; }
+    [Key]
+    [Required]
+    public Guid Id { get; protected set; } = Guid.NewGuid();
     [Required]
     [StringLength(30)]
     public string Nombre { get; set; }
     [Required]
     public double Precio { get; set; }
     [Required]
-    [StringLength(50)]      
-    public string Descripcion { get; set; }
-    [Required]
-    public Categoria categoria { get; set; }
-    [Required]
-    public int CantidadProducto { get; set; }
+    [StringLength(50)]
+    public string Descripcion { get; set; } = string.Empty;
 
-    public Producto( Guid Id,string Nombre, double Precio, string Descripcion, Categoria categoria)
+    public Categoria? categoria { get; set; } = null;
+
+    [Required]
+    public int Stock { get; set; }
+
+    public Producto(string Nombre, double Precio, int Stock)
     {
-
-        this.Id = Id;
         Validacion.ValidacionValor(Precio, "error precio");
         this.Precio = Precio;
         Validacion.ValidacionCadena(Nombre, "error Nombre");
         this.Nombre = Nombre;
         Validacion.ValidacionCadena(Descripcion, "error descripcion");
-        this.Descripcion = Descripcion;
-        this.categoria = categoria;
-
-
+        this.Stock = Stock;
     }
 }

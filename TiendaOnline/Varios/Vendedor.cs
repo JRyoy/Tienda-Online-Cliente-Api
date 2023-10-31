@@ -5,45 +5,44 @@ namespace Varios;
 [Table("Vendedor")]
 public class Vendedor
 {
-   
-   [Key]
-   [Required]
+
+    [Key]
+    [Required]
     public Guid Id { get; protected set; } = Guid.NewGuid();
-   [Required] 
+    [Required]
     [StringLength(30)]
-    public  string Nombre {get; set;}
-   [Required] 
+    public string Nombre { get; set; }
+    [Required]
     [StringLength(30)]
-    public string Apellido {get; set;}
-   [Required] 
+    public string Apellido { get; set; }
+    [Required]
     [StringLength(30)]
-    public string Email {get; set;}
-   [Required] 
+    public string Email { get; set; }
+    [Required]
     [StringLength(30)]
-    public  string Apodo {get; set;}
-   [Required] 
-    public string Password{get; set;}
-    
-    public List<Producto>Productos{ get; set; } = new List<Producto>();
-    public Vendedor ( Guid Id, string Nombre, string Apellido,string Email,string Apodo,string Password)
+    public string Apodo { get; set; }
+    [Required]
+    public string Password { get; set; }
+
+    public List<Producto> Productos { get; set; } = new List<Producto>();
+    public Vendedor(string Nombre, string Apellido, string Email, string Apodo, string Password)
     {
-        this.Id= Guid.NewGuid();
-        Validacion.ValidacionCadena(Nombre,"error Nombre");
-        this.Nombre=Nombre;
-        Validacion.ValidacionCadena(Apellido,"error Apllido");
-        this.Apellido= Apellido;
-        Validacion.ValidarEmail(Email,"error Email");
-        this.Email= Email;
-        Validacion.ValidacionCadena(Password,"error Contraseña");
-        this.Password=Password;
-        Validacion.ValidacionCadena(Apodo,"error Apodo");
-        this.Apodo=Apodo;
-        
-    }   
+        Validacion.ValidacionCadena(Nombre, "error Nombre");
+        this.Nombre = Nombre;
+        Validacion.ValidacionCadena(Apellido, "error Apllido");
+        this.Apellido = Apellido;
+        Validacion.ValidarEmail(Email, "error Email");
+        this.Email = Email;
+        Validacion.ValidacionCadena(Password, "error Contraseña");
+        this.Password = Password;
+        Validacion.ValidacionCadena(Apodo, "error Apodo");
+        this.Apodo = Apodo;
+
+    }
     public void AgregarProductos(Producto producto)
     {
         Productos.Add(producto);
     }
 
-    
+
 }

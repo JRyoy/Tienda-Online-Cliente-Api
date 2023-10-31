@@ -13,9 +13,10 @@ public class Carrito
     public double Total { get; set; }
     List<ItemCarrito> Productos { get; set; }
 
-    public Carrito( Guid Id, Cliente Cliente)
+    public Carrito() { }
+
+    public Carrito(Cliente Cliente)
     {
-        this.Id = Id;
         this.Cliente = Cliente;
         Productos = new List<ItemCarrito>();
         Total = 0;
@@ -40,8 +41,8 @@ public class Carrito
     {
         foreach (var itemCarrito in Productos)
         {
-            if (itemCarrito.Producto.CantidadProducto >= itemCarrito.Cantidad)
-                itemCarrito.Producto.CantidadProducto -= itemCarrito.Cantidad;
+            if (itemCarrito.Producto.Stock >= itemCarrito.Cantidad)
+                itemCarrito.Producto.Stock -= itemCarrito.Cantidad;
             else
                 throw new Exception($"No hay suficiente stock para {itemCarrito.Producto.Nombre}");
 

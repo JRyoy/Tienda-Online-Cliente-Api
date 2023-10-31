@@ -8,19 +8,19 @@ using Api.Funcionalidades.Vendedores;
 
 namespace Api.Funcionalidades;
 
-public static  class ServiceManager
+public static class ServiceManager
 {
-    public static   IServiceCollection AddServiceManager(this IServiceCollection services)
+    public static IServiceCollection AddServiceManager(this IServiceCollection services)
     {
-        services.AddSingleton< IVendedorService,VendedorService>();
-        services.AddSingleton<IClienteService,ClienteService>();
-        services.AddSingleton<IProductoService,ProductoService>();
-        services.AddSingleton<IPlataformaService,PlataformaService>();
-        services.AddSingleton<ICategoriaService,CategoriaService>();
-        services.AddSingleton<IItemCarritoService,ItemCarritoService>();
-        services.AddSingleton<ICarritoService,CarritoService>();
+        services.AddScoped<IVendedorService, VendedorService>();
+        services.AddScoped<IClienteService, ClienteService>();
+        services.AddScoped<IProductoService, ProductoService>();
+        services.AddScoped<IPlataformaService, PlataformaService>();
+        services.AddScoped<ICategoriaService, CategoriaService>();
+        services.AddScoped<IItemCarritoService, ItemCarritoService>();
+        services.AddScoped<ICarritoService, CarritoService>();
 
-    return services;
+        return services;
 
     }
 }
