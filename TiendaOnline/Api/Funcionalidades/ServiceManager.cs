@@ -18,7 +18,6 @@ public static class ServiceManager
         services.AddScoped<ICategoriaService, CategoriaService>();
         services.AddScoped<IItemCarritoService, ItemCarritoService>();
         services.AddScoped<ICarritoService, CarritoService>();
-
         return services;
 
     }
