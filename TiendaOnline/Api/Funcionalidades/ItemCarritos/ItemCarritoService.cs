@@ -1,4 +1,6 @@
 namespace Api.Funcionalidades.ItemCarritos;
+
+using Api.Persistencia;
 using Varios;
 public interface IItemCarritoService
 {
@@ -6,14 +8,14 @@ public interface IItemCarritoService
 }
 public  class ItemCarritoService:IItemCarritoService
 {
-    List<ItemCarrito>itemCarritos;
-    public ItemCarritoService()
+    private readonly AplicacionDBContext context;
+    public ItemCarritoService(AplicacionDBContext context)
     {
-        itemCarritos=new List<ItemCarrito>{};
+        this.context = context;
 
     }
     public List<ItemCarrito>GetItemCarritos()
     {
-        return itemCarritos;
+        return context.ItemCarritos.ToList();
     }
 }

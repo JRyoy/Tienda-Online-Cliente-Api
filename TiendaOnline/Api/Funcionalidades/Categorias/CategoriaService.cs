@@ -1,3 +1,4 @@
+using Api.Persistencia;
 using Varios;
 
 namespace Api.Funcionalidades.Categorias;
@@ -8,13 +9,13 @@ public interface ICategoriaService
 }
 public class CategoriaService:ICategoriaService
 {
-    List<Categoria>categorias;
-    public CategoriaService()
+     private readonly AplicacionDBContext context;
+    public CategoriaService(AplicacionDBContext context)
     {
-        categorias=new List<Categoria>{};
+        this.context = context;
     }
     public List<Categoria>GetCategoria()
     {
-        return categorias;
+        return context.Categorias.ToList();
     }
 }

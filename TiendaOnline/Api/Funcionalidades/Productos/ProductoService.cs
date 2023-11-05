@@ -1,23 +1,23 @@
 namespace Api.Funcionalidades.Productos;
+
+using Api.Persistencia;
 using Varios;
 public interface IProductoService
 {
     List<Producto> GetProductos();
 }
 public class ProductoService : IProductoService
-{
-    List<Producto> productos;
-    public ProductoService()
+{   
+      private readonly AplicacionDBContext context;
+
+    public ProductoService(AplicacionDBContext context)
     {
-        productos = new List<Producto>
-        {
-            //new Producto(Guid.NewGuid(), "Peluche de messi", 20, "Peluche messi", Cate);
-        };
+        this.context = context;
     }
 
     public List<Producto> GetProductos()
     {
-        return productos;
+        return context.Productos.ToList();
     }
 }
 

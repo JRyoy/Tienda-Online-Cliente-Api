@@ -1,3 +1,4 @@
+using Api.Persistencia;
 using Varios;
 
 namespace Api.Funcionalidades.Clientes;
@@ -8,13 +9,13 @@ public interface IClienteService
 }
 public class ClienteService:IClienteService
 {
-    List<Cliente>clientes;
-    public ClienteService()
+    private readonly AplicacionDBContext context;
+    public ClienteService(AplicacionDBContext context)
     {
-        clientes=new List<Cliente>{};
+         this.context = context;
     }
     public List<Cliente>GetClientes()
     {
-        return clientes;
+        return context.Clientes.ToList();
     }
 }

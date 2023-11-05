@@ -12,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddServiceManager();
 builder.Services.AddCarter();
+
 var connectionString = builder.Configuration.GetConnectionString("aplicacion_db");
 
 builder.Services.AddDbContext<AplicacionDBContext>(opcion => opcion.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 34))));
