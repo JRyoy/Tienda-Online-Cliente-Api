@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Api.Persistencia.Migraciones
 {
-    [DbContext(typeof(AplicacionDBContext))]
+    [DbContext(typeof(AplicacionDbContext))]
     [Migration("20231031123616_MigracionInicial")]
     partial class MigracionInicial
     {
