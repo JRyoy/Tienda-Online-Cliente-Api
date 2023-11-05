@@ -9,8 +9,8 @@ public interface ICategoriaService
 }
 public class CategoriaService:ICategoriaService
 {
-     private readonly AplicacionDBContext context;
-    public CategoriaService(AplicacionDBContext context)
+     private readonly AplicacionDbContext context;
+    public CategoriaService(AplicacionDbContext context)
     {
         this.context = context;
     }

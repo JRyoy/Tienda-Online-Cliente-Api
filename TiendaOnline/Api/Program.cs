@@ -15,17 +15,19 @@ builder.Services.AddCarter();
 
 var connectionString = builder.Configuration.GetConnectionString("aplicacion_db");
 
-builder.Services.AddDbContext<AplicacionDBContext>(opcion => opcion.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 34))));
+builder.Services.AddDbContext<AplicacionDbContext>(opcion => opcion.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 34))));
 
-var opciones = new DbContextOptionsBuilder<AplicacionDBContext>();
+var opciones = new DbContextOptionsBuilder<AplicacionDbContext>();
 
 opciones.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 34)));
 
-var contexto = new AplicacionDBContext(opciones.Options);
+
+var contexto = new AplicacionDbContext(opciones.Options);
 
      contexto.Database.EnsureCreated();
 
 var app = builder.Build();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

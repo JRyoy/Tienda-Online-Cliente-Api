@@ -8,9 +8,9 @@ public interface IVendedorService
 }
 public class VendedorService : IVendedorService
 {
-    private readonly AplicacionDBContext context;
+    private readonly AplicacionDbContext context;
 
-    public VendedorService(AplicacionDBContext context)
+    public VendedorService(AplicacionDbContext context)
     {
         this.context = context;
     }

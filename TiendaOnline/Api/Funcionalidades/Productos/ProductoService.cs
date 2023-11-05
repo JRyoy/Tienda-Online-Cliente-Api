@@ -8,15 +8,16 @@ public interface IProductoService
 }
 public class ProductoService : IProductoService
 {   
-      private readonly AplicacionDBContext context;
+      private readonly AplicacionDbContext context;
 
-    public ProductoService(AplicacionDBContext context)
+    public ProductoService(AplicacionDbContext context)
     {
         this.context = context;
     }
 
     public List<Producto> GetProductos()
     {
+
         return context.Productos.ToList();
     }
 }

@@ -9,8 +9,8 @@ public interface IClienteService
 }
 public class ClienteService:IClienteService
 {
-    private readonly AplicacionDBContext context;
-    public ClienteService(AplicacionDBContext context)
+    private readonly AplicacionDbContext context;
+    public ClienteService(AplicacionDbContext context)
     {
          this.context = context;
     }

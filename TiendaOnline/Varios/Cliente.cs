@@ -5,6 +5,8 @@ namespace Varios;
 [Table("Cliente")]
 public class Cliente : Vendedor
 {
+    private string v;
+
     public List<Carrito> Carritos { get; set; }
     public Cliente(string Nombre, string Apellido, string Email, string Apodo, string Password) :
         base(Nombre, Apellido, Email, Apodo, Password)
@@ -12,5 +14,6 @@ public class Cliente : Vendedor
         Validacion.ValidarEmail(Email, "error email");
         this.Carritos = new List<Carrito>();
     }
+
 
 }
