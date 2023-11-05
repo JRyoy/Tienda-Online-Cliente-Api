@@ -28,7 +28,6 @@ public class Producto
         this.Precio = Precio;
         Validacion.ValidacionCadena(Nombre, "error Nombre");
         this.Nombre = Nombre;
-        Validacion.ValidacionCadena(Descripcion, "error descripcion");
         this.Stock = Stock;
     }
 }

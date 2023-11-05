@@ -12,7 +12,7 @@ public class Categoria
     [StringLength(30)]
     public string Nombre { get; set; }
     [Required]
-    [StringLength(30)]
+    [StringLength(100)]
     public string Descripcion { get; set; }
     List<Producto> Productos { get; set; }
 
