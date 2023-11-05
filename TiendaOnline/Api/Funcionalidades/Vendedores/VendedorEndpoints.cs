@@ -18,12 +18,12 @@ public  class VendedorEndpoints:ICarterModule
             vendedorService.Createvendedor(vendedorDto);
                 return Results.Ok();
         });
-        app.MapPut("/api/Vendedor/{vendedorId}}",([FromServices]IVendedorService vendedorService,Guid  vendedorId ,VendedorDto vendedorDto)=>
+        app.MapPut("/api/Vendedor/{vendedorId}",([FromServices]IVendedorService vendedorService,Guid  vendedorId ,VendedorDto vendedorDto)=>
         {
                 vendedorService.Updatevendedor(vendedorId,vendedorDto);
                 return Results.Ok();
         });
-        app.MapPut("/api/Vendedor/{vendedorId}}",([FromServices]IVendedorService vendedorService,Guid  vendedorId )=>
+        app.MapDelete("/api/Vendedor/{vendedorId}",([FromServices]IVendedorService vendedorService,Guid  vendedorId )=>
         {
                 vendedorService.Daletevendedor(vendedorId);
                 return Results.Ok();
