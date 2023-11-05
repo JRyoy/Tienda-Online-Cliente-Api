@@ -23,7 +23,7 @@ opciones.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 34)
 
 var contexto = new AplicacionDBContext(opciones.Options);
 
-contexto.Database.EnsureCreated();
+     contexto.Database.EnsureCreated();
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.
