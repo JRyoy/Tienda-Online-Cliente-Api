@@ -13,6 +13,21 @@ public class ClienteEndpoints:ICarterModule
         {
             return Results.Ok(clienteService.GetClientes());
         });
+        app.MapPost("/api/Cliente",([FromServices]IClienteService clienteService,ClienteDto clienteDto )=>
+        {
+            clienteService.CreateClientes(clienteDto);
+            return Results.Ok();
+        });
+        app.MapPut("/api/Cliente/{clienteid}",([FromServices]IClienteService clienteService,Guid clienteid ,ClienteDto clienteDto )=>
+        {
+            clienteService.UpdateClientes(clienteid,clienteDto);
+            return Results.Ok();
+        });
+        app.MapDelete("/api/Cliente/{clienteid}",([FromServices]IClienteService clienteService,Guid clienteid  )=>
+        {
+            clienteService.DeleteClientes(clienteid);
+            return Results.Ok();
+        });
     }
 
 }
