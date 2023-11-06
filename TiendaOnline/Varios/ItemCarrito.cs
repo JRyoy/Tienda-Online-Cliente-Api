@@ -8,6 +8,7 @@ public class ItemCarrito
     public Guid Id { get; protected set; } = Guid.NewGuid();
 
     [Required]
+    
     public Producto Producto { get; set; }
     [Required]
     public int Cantidad { get; set; }

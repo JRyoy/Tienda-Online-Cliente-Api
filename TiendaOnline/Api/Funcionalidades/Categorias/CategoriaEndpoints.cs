@@ -29,8 +29,17 @@ public  class CategoriaEndpoints:ICarterModule
             categoriaService.DaleteCategoria(categoriaid);
             return Results.Ok();
         });
-    
-    
+        
+         app.MapPost("/api/categoria/{categoriaid}/producto/{productoid}",([FromServices]ICategoriaService categoriaService,Guid categoriaid,Guid productoid)  =>
+        {
+            categoriaService.AddCategoria(categoriaid,productoid);
+            return Results.Ok();
+        });
+         app.MapDelete("/api/categoria/{categoriaid}/producto/{productoid}/Delete",([FromServices]ICategoriaService categoriaService,Guid categoriaid,Guid productoid)  =>
+        {
+            categoriaService.Daleteproducto(categoriaid,productoid);
+            return Results.Ok();
+        });
     }
 
 }

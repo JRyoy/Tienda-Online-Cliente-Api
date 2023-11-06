@@ -16,7 +16,8 @@ public class Producto
     [Required]
     [StringLength(50)]
     public string Descripcion { get; set; } = string.Empty;
-
+    
+    [ForeignKey("IdCategoria")]
     public Categoria? categoria { get; set; } = null;
 
     [Required]

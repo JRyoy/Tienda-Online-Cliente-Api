@@ -22,4 +22,5 @@ public class Categoria
         this.Descripcion = Descripcion;
         this.Productos = new List<Producto>();
     }
+    public void AgregarProductos(Producto producto)=>Productos.Add(producto);
 }

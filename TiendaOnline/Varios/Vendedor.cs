@@ -39,10 +39,7 @@ public class Vendedor
         this.Apodo = Apodo;
 
     }
-    public void AgregarProductos(Producto producto)
-    {
-        Productos.Add(producto);
-    }
+    public void AgregarProductos(Producto producto)=>Productos.Add(producto);
 
 
 }
