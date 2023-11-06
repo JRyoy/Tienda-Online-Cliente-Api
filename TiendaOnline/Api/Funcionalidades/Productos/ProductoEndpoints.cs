@@ -17,14 +17,14 @@ public  class ProductoEndpoints:ICarterModule
             productoService.Createproducto(productoDto);
                 return Results.Ok();
         });
-            app.MapPut("/api/producto/{productoId}",([FromServices]IProductoService productoService, Guid  productoId,ProductoDto productoDto )=>
+            app.MapPut("/api/producto/{productoId}",([FromServices]IProductoService productoService, Guid  productoid,ProductoDto productoDto )=>
         {
-               productoService.Updateproducto(productoId ,productoDto);
+               productoService.Updateproducto(productoid ,productoDto);
                 return Results.Ok();
         });
-            app.MapDelete("/api/producto/{productoId}",([FromServices]IProductoService productoService, Guid productoId,ProductoDto productoDto )=>
+            app.MapDelete("/api/producto/{productoId}",([FromServices]IProductoService productoService, Guid productoid)=>
         {
-                productoService.Daleteproducto(productoId ,productoDto);
+                productoService.Daleteproducto(productoid);
                 return Results.Ok();
         });
 
