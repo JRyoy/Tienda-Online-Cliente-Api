@@ -8,6 +8,7 @@ public  class VendedorEndpoints:ICarterModule
     {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
+            #region Vendedor
             app.MapGet("/api/Vendedor", ([FromServices]IVendedorService vendedorService) =>
             {
                 return Results.Ok(vendedorService.GetVendedores());
@@ -28,6 +29,9 @@ public  class VendedorEndpoints:ICarterModule
                 vendedorService.Daletevendedor(vendedorid);
                 return Results.Ok();
         });
+            #endregion
+            #region ListProducto
+                
             app.MapPost("/api/Vendedor/{vendedorid/producto/{productoid}}",([FromServices]IVendedorService vendedorService,Guid vendedorid,Guid productoid)=>
         {
             vendedorService.Addproducto(vendedorid,productoid);
@@ -38,5 +42,6 @@ public  class VendedorEndpoints:ICarterModule
             vendedorService.Deleteproducto(vendedorid,productoid);
                 return Results.Ok();
         });
+            #endregion
     }
 }

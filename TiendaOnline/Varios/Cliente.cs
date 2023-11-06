@@ -14,6 +14,6 @@ public class Cliente : Vendedor
         Validacion.ValidarEmail(Email, "error email");
         this.Carritos = new List<Carrito>();
     }
-
+    public void AgregarCarrito(Carrito carrito)=>Carritos.Add(carrito); 
 
 }

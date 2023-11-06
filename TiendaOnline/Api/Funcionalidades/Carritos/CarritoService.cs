@@ -5,6 +5,7 @@ namespace Api.Funcionalidades.Carritos;
 
 public interface ICarritoService
 {
+    void AddItemcarrito(Guid carritoid, Guid itemcarritoid);
     void CreateCarrito(CarritoDto carritoDto);
     void DeleteCarrito(Guid carritoid);
     List<Carrito>GetCarrito();
@@ -16,6 +17,16 @@ public class CarritoService:ICarritoService
     public CarritoService(AplicacionDbContext context)
     {
         this.context = context;
+    }
+
+    public void AddItemcarrito(Guid carritoid, Guid itemcarritoid)
+    {
+        var carrito=context.Carritos.FirstOrDefault(x=>x.Id==carritoid);
+        var itemCarrito=context.ItemCarritos.FirstOrDefault(x=>x.Id ==itemcarritoid);
+        if(carrito !=null&&itemCarrito!=null)
+       {
+            carrito.AgregarProductos(itemCarrito.Producto,itemCarrito.Cantidad);
+       }
     }
 
     public void CreateCarrito(CarritoDto carritoDto)

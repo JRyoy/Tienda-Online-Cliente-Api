@@ -5,7 +5,9 @@ namespace Api.Funcionalidades.Clientes;
 
 public interface IClienteService
 {
+    void AddCarrito(Guid clienteid, Guid carritoid);
     void CreateClientes(ClienteDto clienteDto);
+    void Deletecarrito(Guid clienteid, Guid carritoid);
     void DeleteClientes(Guid clienteid);
     List<Cliente>GetClientes();
     void UpdateClientes(Guid clienteid ,ClienteDto clienteDto);
@@ -18,11 +20,34 @@ public class ClienteService:IClienteService
          this.context = context;
     }
 
+    public void AddCarrito(Guid clienteid, Guid carritoid)
+    {
+        var cliente=context.Clientes.FirstOrDefault(x=>x.Id==clienteid);
+        var carrito=context.Carritos.FirstOrDefault(x=>x.Id==carritoid);
+        if(cliente!=null &&carrito!=null)
+        {
+            cliente.AgregarCarrito(carrito);
+            context.SaveChanges();
+        }
+
+    }
+
     public void CreateClientes(ClienteDto clienteDto)
     {
         context.Clientes.Add(new Cliente(clienteDto.Nombre,clienteDto.Apellido,
         clienteDto.Email,clienteDto.Apodo, clienteDto.Password));
         context.SaveChanges();
+    }
+
+    public void Deletecarrito(Guid clienteid, Guid carritoid)
+    {
+        var cliente=context.Clientes.FirstOrDefault(x=>x.Id==clienteid);
+        var carrito=context.Carritos.FirstOrDefault(x=>x.Id==carritoid);
+        if(cliente!=null &&carrito!=null)
+        {
+            context.Remove(carrito);
+            context.SaveChanges();
+        }
     }
 
     public void DeleteClientes(Guid clienteid)

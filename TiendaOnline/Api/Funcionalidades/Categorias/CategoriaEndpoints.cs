@@ -9,6 +9,7 @@ public  class CategoriaEndpoints:ICarterModule
 
     public void AddRoutes(IEndpointRouteBuilder app)
     {
+         #region Categoria
          app.MapGet("/api/categoria",([FromServices]ICategoriaService categoriaService)  =>
         {
             return Results.Ok(categoriaService.GetCategoria());
@@ -29,7 +30,9 @@ public  class CategoriaEndpoints:ICarterModule
             categoriaService.DaleteCategoria(categoriaid);
             return Results.Ok();
         });
-        
+        #endregion
+        #region LisProducto
+            
          app.MapPost("/api/categoria/{categoriaid}/producto/{productoid}",([FromServices]ICategoriaService categoriaService,Guid categoriaid,Guid productoid)  =>
         {
             categoriaService.AddCategoria(categoriaid,productoid);
@@ -40,6 +43,8 @@ public  class CategoriaEndpoints:ICarterModule
             categoriaService.Daleteproducto(categoriaid,productoid);
             return Results.Ok();
         });
+        
+        #endregion
     }
 
 }

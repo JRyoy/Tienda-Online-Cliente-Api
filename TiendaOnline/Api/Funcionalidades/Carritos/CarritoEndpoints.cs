@@ -7,6 +7,8 @@ public class CarritoEndpoints : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
+        #region 
+
         app.MapGet("/api/Carrito",([FromServices]ICarritoService carritoService)=>
         {
             return Results.Ok(carritoService.GetCarrito());
@@ -27,7 +29,14 @@ public class CarritoEndpoints : ICarterModule
             carritoService.DeleteCarrito(carritoid);
             return Results.Ok();
         });
-        
+        #endregion
+        #region ListItem
+        app.MapPost("/api/Carrito/{carritoid}/itemcarrito/{itemcarritoid}",([FromServices]ICarritoService carritoService,Guid carritoid,Guid itemcarritoid)=>
+        {
+            carritoService.AddItemcarrito(carritoid,itemcarritoid);
+            return Results.Ok();
+        });
+        #endregion
     }
 
 }
