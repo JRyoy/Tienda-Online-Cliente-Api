@@ -4,44 +4,44 @@ using Varios;
 
 namespace Api.Funcionalidades.Clientes;
 
-public class ClienteEndpoints:ICarterModule
+public class ClienteEndpoints : ICarterModule
 {
 
     public void AddRoutes(IEndpointRouteBuilder app)
     {
         #region Cliente
-        app.MapGet("/api/Cliente",([FromServices]IClienteService clienteService )=>
+        app.MapGet("/api/Cliente", ([FromServices] IClienteService clienteService) =>
         {
             return Results.Ok(clienteService.GetClientes());
         });
-        app.MapPost("/api/Cliente",([FromServices]IClienteService clienteService,ClienteDto clienteDto )=>
+        app.MapPost("/api/Cliente", ([FromServices] IClienteService clienteService, ClienteDto clienteDto) =>
         {
             clienteService.CreateClientes(clienteDto);
             return Results.Ok();
         });
-        app.MapPut("/api/Cliente/{clienteid}",([FromServices]IClienteService clienteService,Guid clienteid ,ClienteDto clienteDto )=>
+        app.MapPut("/api/Cliente/{clienteid}", ([FromServices] IClienteService clienteService, Guid clienteid, ClienteDto clienteDto) =>
         {
-            clienteService.UpdateClientes(clienteid,clienteDto);
+            clienteService.UpdateClientes(clienteid, clienteDto);
             return Results.Ok();
         });
-        app.MapDelete("/api/Cliente/{clienteid}",([FromServices]IClienteService clienteService,Guid clienteid  )=>
+        app.MapDelete("/api/Cliente/{clienteid}", ([FromServices] IClienteService clienteService, Guid clienteid) =>
         {
             clienteService.DeleteClientes(clienteid);
             return Results.Ok();
         });
         #endregion
         #region ListCarrito
-        app.MapPost("/api/Cliente/{clienteid/carrito/{carritoid}",([FromServices]IClienteService clienteService,Guid clienteid,Guid carritoid )=>
+        app.MapPost("/api/Cliente/{clienteid}/carrito/{carritoid}", ([FromServices] IClienteService clienteService, Guid clienteid, Guid carritoid) =>
         {
-            clienteService.AddCarrito(clienteid,carritoid);
+            clienteService.AddCarrito(clienteid, carritoid);
             return Results.Ok();
         });
-        app.MapDelete("/api/Cliente/{clienteid/carrito/{carritoid}/Delete",([FromServices]IClienteService clienteService,Guid clienteid,Guid carritoid )=>
+        app.MapDelete("/api/Cliente/{clienteid}/carrito/{carritoid}/Delete", ([FromServices] IClienteService clienteService, Guid clienteid, Guid carritoid) =>
         {
-            clienteService.Deletecarrito(clienteid,carritoid);
+            clienteService.Deletecarrito(clienteid, carritoid);
             return Results.Ok();
         });
-            
+
         #endregion
     }
 

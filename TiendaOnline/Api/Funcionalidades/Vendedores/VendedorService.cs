@@ -1,15 +1,16 @@
 using Api.Persistencia;
+using Microsoft.EntityFrameworkCore;
 using Varios;
 namespace Api.Funcionalidades.Vendedores;
 
 public interface IVendedorService
 {
     void Addproducto(Guid vendedorid, Guid productoid);
-    void Createvendedor(VendedorDto vendedorDto);
+    void Createvendedor(VendedorCommandDto vendedorDto);
     void Daletevendedor(Guid vendedorid);
     void Deleteproducto(Guid vendedorid, Guid productoid);
-    List<Vendedor> GetVendedores();
-    void Updatevendedor(Guid  vendedorid,VendedorDto vendedorDto);
+    List<VendedorQueryDto> GetVendedores();
+    void Updatevendedor(Guid vendedorid, VendedorCommandDto vendedorDto);
 }
 public class VendedorService : IVendedorService
 {
@@ -22,26 +23,26 @@ public class VendedorService : IVendedorService
 
     public void Addproducto(Guid vendedorid, Guid productoid)
     {
-         var producto = context.Productos.FirstOrDefault(x => x.Id ==productoid);
-         var vendedor=context.Vendedores.FirstOrDefault(x=>x.Id ==vendedorid);
-         if (vendedor !=null && producto!=null)
+        var producto = context.Productos.FirstOrDefault(x => x.Id == productoid);
+        var vendedor = context.Vendedores.FirstOrDefault(x => x.Id == vendedorid);
+        if (vendedor != null && producto != null)
         {
             vendedor.AgregarProductos(producto);
             context.SaveChanges();
         }
     }
 
-    public void Createvendedor(VendedorDto vendedorDto)
+    public void Createvendedor(VendedorCommandDto vendedorDto)
     {
-        context.Vendedores.Add(new Vendedor(vendedorDto.Nombre,vendedorDto.Apellido,
-        vendedorDto.Email,vendedorDto.Apodo, vendedorDto.Password));
+        context.Vendedores.Add(new Vendedor(vendedorDto.Nombre, vendedorDto.Apellido,
+        vendedorDto.Email, vendedorDto.Apodo, vendedorDto.Password));
         context.SaveChanges();
     }
 
     public void Daletevendedor(Guid vendedorid)
     {
-        var vendedor=context.Vendedores.FirstOrDefault(x=>x.Id ==vendedorid);
-        if (vendedor !=null)
+        var vendedor = context.Vendedores.FirstOrDefault(x => x.Id == vendedorid);
+        if (vendedor != null)
         {
             context.Remove(vendedor);
             context.SaveChanges();
@@ -50,9 +51,9 @@ public class VendedorService : IVendedorService
 
     public void Deleteproducto(Guid vendedorid, Guid productoid)
     {
-        var vendedor=context.Vendedores.FirstOrDefault(x=>x.Id ==vendedorid);
-        var producto = context.Productos.FirstOrDefault(x => x.Id ==productoid);
-        if (vendedor !=null)
+        var vendedor = context.Vendedores.FirstOrDefault(x => x.Id == vendedorid);
+        var producto = context.Productos.FirstOrDefault(x => x.Id == productoid);
+        if (vendedor != null)
         {
             context.Remove(producto);
             context.SaveChanges();
@@ -60,22 +61,23 @@ public class VendedorService : IVendedorService
 
     }
 
-    public List<Vendedor> GetVendedores()
+    public List<VendedorQueryDto> GetVendedores()
     {
-        return context.Vendedores.ToList();
+        return context.Vendedores.Include(x => x.Productos)
+        .Select(x => new VendedorQueryDto { x.Id, x.Apellido, x.Email, x.Apodo, x.Password });
     }
 
-    public void Updatevendedor(Guid vendedorid,VendedorDto vendedorDto)
+    public void Updatevendedor(Guid vendedorid, VendedorCommandDto vendedorDto)
     {
-        var vendedor=context.Vendedores.FirstOrDefault(x=>x.Id ==vendedorid);
-        if (vendedor !=null)
+        var vendedor = context.Vendedores.FirstOrDefault(x => x.Id == vendedorid);
+        if (vendedor != null)
         {
-        vendedor.Nombre=vendedorDto.Nombre;
-        vendedor.Apellido=vendedorDto.Apellido;
-        vendedor.Email=vendedorDto.Email;
-        vendedor.Apodo=vendedorDto.Apodo;
-        vendedor.Password=vendedorDto.Password;
-        context.SaveChanges();
+            vendedor.Nombre = vendedorDto.Nombre;
+            vendedor.Apellido = vendedorDto.Apellido;
+            vendedor.Email = vendedorDto.Email;
+            vendedor.Apodo = vendedorDto.Apodo;
+            vendedor.Password = vendedorDto.Password;
+            context.SaveChanges();
         }
     }
 }

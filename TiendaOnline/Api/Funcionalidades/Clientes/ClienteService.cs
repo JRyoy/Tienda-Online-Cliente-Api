@@ -9,22 +9,22 @@ public interface IClienteService
     void CreateClientes(ClienteDto clienteDto);
     void Deletecarrito(Guid clienteid, Guid carritoid);
     void DeleteClientes(Guid clienteid);
-    List<Cliente>GetClientes();
-    void UpdateClientes(Guid clienteid ,ClienteDto clienteDto);
+    List<Cliente> GetClientes();
+    void UpdateClientes(Guid clienteid, ClienteDto clienteDto);
 }
-public class ClienteService:IClienteService
+public class ClienteService : IClienteService
 {
     private readonly AplicacionDbContext context;
     public ClienteService(AplicacionDbContext context)
     {
-         this.context = context;
+        this.context = context;
     }
 
     public void AddCarrito(Guid clienteid, Guid carritoid)
     {
-        var cliente=context.Clientes.FirstOrDefault(x=>x.Id==clienteid);
-        var carrito=context.Carritos.FirstOrDefault(x=>x.Id==carritoid);
-        if(cliente!=null &&carrito!=null)
+        var cliente = context.Clientes.FirstOrDefault(x => x.Id == clienteid);
+        var carrito = context.Carritos.FirstOrDefault(x => x.Id == carritoid);
+        if (cliente != null && carrito != null)
         {
             cliente.AgregarCarrito(carrito);
             context.SaveChanges();
@@ -34,16 +34,16 @@ public class ClienteService:IClienteService
 
     public void CreateClientes(ClienteDto clienteDto)
     {
-        context.Clientes.Add(new Cliente(clienteDto.Nombre,clienteDto.Apellido,
-        clienteDto.Email,clienteDto.Apodo, clienteDto.Password));
+        context.Clientes.Add(new Cliente(clienteDto.Nombre, clienteDto.Apellido,
+        clienteDto.Email, clienteDto.Apodo, clienteDto.Password));
         context.SaveChanges();
     }
 
     public void Deletecarrito(Guid clienteid, Guid carritoid)
     {
-        var cliente=context.Clientes.FirstOrDefault(x=>x.Id==clienteid);
-        var carrito=context.Carritos.FirstOrDefault(x=>x.Id==carritoid);
-        if(cliente!=null &&carrito!=null)
+        var cliente = context.Clientes.FirstOrDefault(x => x.Id == clienteid);
+        var carrito = context.Carritos.FirstOrDefault(x => x.Id == carritoid);
+        if (cliente != null && carrito != null)
         {
             context.Remove(carrito);
             context.SaveChanges();
@@ -52,29 +52,29 @@ public class ClienteService:IClienteService
 
     public void DeleteClientes(Guid clienteid)
     {
-        var cliente=context.Clientes.FirstOrDefault(x=>x.Id==clienteid);
-        if(cliente!=null)
+        var cliente = context.Clientes.FirstOrDefault(x => x.Id == clienteid);
+        if (cliente != null)
         {
             context.Remove(cliente);
             context.SaveChanges();
         }
     }
 
-    public List<Cliente>GetClientes()
+    public List<Cliente> GetClientes()
     {
         return context.Clientes.ToList();
     }
 
-    public void UpdateClientes(Guid clienteid,ClienteDto clienteDto)
+    public void UpdateClientes(Guid clienteid, ClienteDto clienteDto)
     {
         var cliente = context.Clientes.FirstOrDefault(x => x.Id == clienteid);
-        if(cliente != null)
+        if (cliente != null)
         {
-            cliente.Nombre=clienteDto.Nombre;
-            cliente.Apellido=clienteDto.Apellido;
-            cliente.Email=clienteDto.Email;
-            cliente.Apodo=clienteDto.Apodo;
-            cliente.Password=clienteDto.Password;
+            cliente.Nombre = clienteDto.Nombre;
+            cliente.Apellido = clienteDto.Apellido;
+            cliente.Email = clienteDto.Email;
+            cliente.Apodo = clienteDto.Apodo;
+            cliente.Password = clienteDto.Password;
             context.SaveChanges();
         }
     }
