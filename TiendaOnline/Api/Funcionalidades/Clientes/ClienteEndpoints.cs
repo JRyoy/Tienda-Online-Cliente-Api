@@ -14,12 +14,12 @@ public class ClienteEndpoints : ICarterModule
         {
             return Results.Ok(clienteService.GetClientes());
         });
-        app.MapPost("/api/Cliente", ([FromServices] IClienteService clienteService, ClienteDto clienteDto) =>
+        app.MapPost("/api/Cliente", ([FromServices] IClienteService clienteService, ClienteCommandDto clienteDto) =>
         {
             clienteService.CreateClientes(clienteDto);
             return Results.Ok();
         });
-        app.MapPut("/api/Cliente/{clienteid}", ([FromServices] IClienteService clienteService, Guid clienteid, ClienteDto clienteDto) =>
+        app.MapPut("/api/Cliente/{clienteid}", ([FromServices] IClienteService clienteService, Guid clienteid, ClienteCommandDto clienteDto) =>
         {
             clienteService.UpdateClientes(clienteid, clienteDto);
             return Results.Ok();

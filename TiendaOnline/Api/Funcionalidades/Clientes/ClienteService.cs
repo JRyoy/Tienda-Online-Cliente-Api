@@ -1,3 +1,4 @@
+using Api.Funcionalidades.Productos;
 using Api.Persistencia;
 using Varios;
 
@@ -6,11 +7,11 @@ namespace Api.Funcionalidades.Clientes;
 public interface IClienteService
 {
     void AddCarrito(Guid clienteid, Guid carritoid);
-    void CreateClientes(ClienteDto clienteDto);
+    void CreateClientes(ClienteCommandDto clienteDto);
     void Deletecarrito(Guid clienteid, Guid carritoid);
     void DeleteClientes(Guid clienteid);
     List<Cliente> GetClientes();
-    void UpdateClientes(Guid clienteid, ClienteDto clienteDto);
+    void UpdateClientes(Guid clienteid, ClienteCommandDto clienteDto);
 }
 public class ClienteService : IClienteService
 {
@@ -32,7 +33,7 @@ public class ClienteService : IClienteService
 
     }
 
-    public void CreateClientes(ClienteDto clienteDto)
+    public void CreateClientes(ClienteCommandDto clienteDto)
     {
         context.Clientes.Add(new Cliente(clienteDto.Nombre, clienteDto.Apellido,
         clienteDto.Email, clienteDto.Apodo, clienteDto.Password));
@@ -62,10 +63,17 @@ public class ClienteService : IClienteService
 
     public List<Cliente> GetClientes()
     {
-        return context.Clientes.ToList();
+        return context.Clientes.Include.(x => x.Productos)
+        .Select(x => new ClienteQueryDto { 
+            Apellido = x.Apellido, 
+            Email = x.Email, 
+            Apodo = x.Apodo, 
+            Password = x.Password, 
+            Productos = x.Producto.Select(y => new ProductoQueryDto{Id = y.Id,  Nombre = y.Nombre, Precio = y.Precio, Stock = y.Stock}).ToList() 
+            });
     }
 
-    public void UpdateClientes(Guid clienteid, ClienteDto clienteDto)
+    public void UpdateClientes(Guid clienteid, ClienteCommandDto clienteDto)
     {
         var cliente = context.Clientes.FirstOrDefault(x => x.Id == clienteid);
         if (cliente != null)
