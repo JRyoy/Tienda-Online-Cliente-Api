@@ -7,7 +7,7 @@ public interface IProductoService
 {
     void Createproducto(ProductoCommandDto productoDto);
     void Daleteproducto(Guid productoid);
-    List<Producto> GetProductos();
+    List<ProductoQueryDto> GetProductos();
     void Updateproducto(Guid productoId, ProductoCommandDto productoDto);
 }
 public class ProductoService : IProductoService
@@ -19,7 +19,7 @@ public class ProductoService : IProductoService
         this.context = context;
     }
 
-    public void Createproducto(ProductoQueryDto productoDto)
+    public void Createproducto(ProductoCommandDto productoDto)
     {
         context.Productos.Add(new Producto(productoDto.Nombre, productoDto.Precio, productoDto.Stock));
         context.SaveChanges();
@@ -37,9 +37,7 @@ public class ProductoService : IProductoService
 
     public List<ProductoQueryDto> GetProductos()
     {
-
-        return context.Productos.Select(x => new ProductoQueryDto { Nombre = x.Nombre, Precio = x.Precio, Stock = x.Stock }).ToList();
-        
+        return context.Productos.Select(x => new ProductoQueryDto { Id = x.Id, Nombre = x.Nombre, Precio = x.Precio, Stock = x.Stock }).ToList();
     }
 
     public void Updateproducto(Guid productoid, ProductoCommandDto productoDto)

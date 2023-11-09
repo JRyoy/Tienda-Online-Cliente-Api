@@ -53,11 +53,12 @@ public class VendedorService : IVendedorService
 
     public void Deleteproducto(Guid vendedorid, Guid productoid)
     {
-        var vendedor = context.Vendedores.FirstOrDefault(x => x.Id == vendedorid);
-        var producto = context.Productos.FirstOrDefault(x => x.Id == productoid);
-        if (vendedor != null)
+        var vendedor = context.Vendedores.Where(x => x.Id == vendedorid).Include(x => x.Productos).First();
+        var producto = vendedor?.Productos.FirstOrDefault(x => x.Id == productoid);
+
+        if (vendedor != null && producto != null)
         {
-            context.Remove(producto);
+            vendedor.Productos.Remove(producto);
             context.SaveChanges();
         }
 
