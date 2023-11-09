@@ -1,3 +1,5 @@
+using Api.Funcionalidades.Productos;
+
 namespace Api.Funcionalidades.Vendedores;
 
 public class VendedorCommandDto
@@ -17,5 +19,5 @@ public class VendedorQueryDto
     public string Email { get; set; }
     public string Apodo { get; set; }
     public string Password { get; set; }
-    public List<ProductosQueryDto> Productos { get; set; } = new List<ProductosQueryDto>();
+    public List<ProductoQueryDto> Productos { get; set; } = new List<ProductoQueryDto>();
 }

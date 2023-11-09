@@ -5,10 +5,10 @@ using Api.Persistencia;
 using Varios;
 public interface IProductoService
 {
-    void Createproducto(ProductoDto productoDto);
+    void Createproducto(ProductoCommandDto productoDto);
     void Daleteproducto(Guid productoid);
     List<Producto> GetProductos();
-    void Updateproducto(Guid productoId, ProductoDto productoDto);
+    void Updateproducto(Guid productoId, ProductoCommandDto productoDto);
 }
 public class ProductoService : IProductoService
 {
@@ -19,7 +19,7 @@ public class ProductoService : IProductoService
         this.context = context;
     }
 
-    public void Createproducto(ProductoDto productoDto)
+    public void Createproducto(ProductoQueryDto productoDto)
     {
         context.Productos.Add(new Producto(productoDto.Nombre, productoDto.Precio, productoDto.Stock));
         context.SaveChanges();
@@ -35,13 +35,14 @@ public class ProductoService : IProductoService
         }
     }
 
-    public List<Producto> GetProductos()
+    public List<ProductoQueryDto> GetProductos()
     {
 
-        return context.Productos.ToList();
+        return context.Productos.Select(x => new ProductoQueryDto { Nombre = x.Nombre, Precio = x.Precio, Stock = x.Stock }).ToList();
+        
     }
 
-    public void Updateproducto(Guid productoid, ProductoDto productoDto)
+    public void Updateproducto(Guid productoid, ProductoCommandDto productoDto)
     {
         var producto = context.Productos.FirstOrDefault(x => x.Id == productoid);
         if (producto != null)

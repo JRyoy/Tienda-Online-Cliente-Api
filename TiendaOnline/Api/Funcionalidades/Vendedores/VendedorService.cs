@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+using Api.Funcionalidades.Productos;
 using Api.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Varios;
@@ -64,7 +66,14 @@ public class VendedorService : IVendedorService
     public List<VendedorQueryDto> GetVendedores()
     {
         return context.Vendedores.Include(x => x.Productos)
-        .Select(x => new VendedorQueryDto { x.Id, x.Apellido, x.Email, x.Apodo, x.Password });
+        .Select(x => new VendedorQueryDto { 
+            Id = x.Id, 
+            Apellido = x.Apellido, 
+            Email = x.Email, 
+            Apodo = x.Apodo, 
+            Password = x.Password, 
+            Productos = x.Producto.Select(y => new ProductoQueryDto{Id = y.Id,  Nombre = y.Nombre, Precio = y.Precio, Stock = y.Stock}).ToList() 
+            })ToList();
     }
 
     public void Updatevendedor(Guid vendedorid, VendedorCommandDto vendedorDto)

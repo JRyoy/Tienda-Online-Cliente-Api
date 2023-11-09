@@ -12,12 +12,12 @@ public class ProductoEndpoints : ICarterModule
     {
         return Results.Ok(productoService.GetProductos());
     });
-        app.MapPost("/api/producto", ([FromServices] IProductoService productoService, ProductoDto productoDto) =>
+        app.MapPost("/api/producto", ([FromServices] IProductoService productoService, ProductoCommandDto productoDto) =>
     {
         productoService.Createproducto(productoDto);
         return Results.Ok();
     });
-        app.MapPut("/api/producto/{productoId}", ([FromServices] IProductoService productoService, Guid productoid, ProductoDto productoDto) =>
+        app.MapPut("/api/producto/{productoId}", ([FromServices] IProductoService productoService, Guid productoid, ProductoCommandDto productoDto) =>
     {
         productoService.Updateproducto(productoid, productoDto);
         return Results.Ok();
