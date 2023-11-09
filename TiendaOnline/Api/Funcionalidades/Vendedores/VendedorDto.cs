@@ -13,7 +13,7 @@ public class VendedorCommandDto
 }
 public class VendedorQueryDto
 {
-    public Guid Id { get; protected set; } = Guid.NewGuid();
+    public Guid Id { get; set; } = Guid.NewGuid();
     public string Nombre { get; set; }
     public string Apellido { get; set; }
     public string Email { get; set; }

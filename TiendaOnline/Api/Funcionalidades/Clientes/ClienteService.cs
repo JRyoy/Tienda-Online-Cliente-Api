@@ -1,5 +1,6 @@
 using Api.Funcionalidades.Productos;
 using Api.Persistencia;
+using Microsoft.EntityFrameworkCore;
 using Varios;
 
 namespace Api.Funcionalidades.Clientes;
@@ -10,7 +11,7 @@ public interface IClienteService
     void CreateClientes(ClienteCommandDto clienteDto);
     void Deletecarrito(Guid clienteid, Guid carritoid);
     void DeleteClientes(Guid clienteid);
-    List<Cliente> GetClientes();
+    List<ClienteQueryDto> GetClientes();
     void UpdateClientes(Guid clienteid, ClienteCommandDto clienteDto);
 }
 public class ClienteService : IClienteService
@@ -61,16 +62,17 @@ public class ClienteService : IClienteService
         }
     }
 
-    public List<Cliente> GetClientes()
+    public List<ClienteQueryDto> GetClientes()
     {
-        return context.Clientes.Include.(x => x.Productos)
-        .Select(x => new ClienteQueryDto { 
-            Apellido = x.Apellido, 
-            Email = x.Email, 
-            Apodo = x.Apodo, 
-            Password = x.Password, 
-            Productos = x.Producto.Select(y => new ProductoQueryDto{Id = y.Id,  Nombre = y.Nombre, Precio = y.Precio, Stock = y.Stock}).ToList() 
-            });
+        return context.Clientes.Include(x => x.Productos)
+        .Select(x => new ClienteQueryDto
+        {
+            Apellido = x.Apellido,
+            Email = x.Email,
+            Apodo = x.Apodo,
+            Password = x.Password,
+            Productos = x.Productos.Select(y => new ProductoQueryDto { Id = y.Id, Nombre = y.Nombre, Precio = y.Precio, Stock = y.Stock }).ToList()
+        }).ToList();
     }
 
     public void UpdateClientes(Guid clienteid, ClienteCommandDto clienteDto)
