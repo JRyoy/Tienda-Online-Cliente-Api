@@ -1,4 +1,5 @@
 using Api.Persistencia;
+using Microsoft.EntityFrameworkCore;
 using Varios;
 
 namespace Api.Funcionalidades.Carritos;
@@ -6,10 +7,11 @@ namespace Api.Funcionalidades.Carritos;
 public interface ICarritoService
 {
     void AddItemcarrito(Guid carritoid, Guid itemcarritoid);
-    void CreateCarrito(CarritoDto carritoDto);
+    void CreateCarrito(CarritoCommandDto carritoDto);
     void DeleteCarrito(Guid carritoid);
-    List<Carrito> GetCarrito();
-    void UpdateCarrito(Guid carritoid, CarritoDto carritoDto);
+    void DeleteItemCarrito(Guid carritoid, Guid itemcarritoid);
+    List<CarritoQueryDto> GetCarrito();
+    void UpdateCarrito(Guid carritoid, CarritoCommandDto carritoDto);
 }
 public class CarritoService : ICarritoService
 {
@@ -29,7 +31,7 @@ public class CarritoService : ICarritoService
         }
     }
 
-    public void CreateCarrito(CarritoDto carritoDto)
+    public void CreateCarrito(CarritoCommandDto carritoDto)
     {
         context.Carritos.Add(new Carrito(carritoDto.Cliente));
         context.SaveChanges();
@@ -45,12 +47,31 @@ public class CarritoService : ICarritoService
         }
     }
 
-    public List<Carrito> GetCarrito()
+    public void DeleteItemCarrito(Guid carritoid, Guid itemcarritoid)
     {
-        return context.Carritos.ToList();
+       var carrito = context.Carritos.Where(x => x.Id == carritoid).Include(x=>x.Productos).First();
+        var itemCarrito = carrito.Productos.FirstOrDefault(x => x.Id == itemcarritoid);
+         if (carrito != null && itemCarrito != null)
+        {
+            carrito.Productos.Remove(itemCarrito);
+            context.SaveChanges();
+        }
     }
 
-    public void UpdateCarrito(Guid carritoid, CarritoDto carritoDto)
+    public List<CarritoQueryDto> GetCarrito()
+    {
+        return context.Carritos.Include(x=>x.Productos)
+        .Select( x=>new CarritoQueryDto
+        {
+            Id=x.Id,
+            Cliente=x.Cliente,
+            Total=x.Total,
+            Productos=x.Productos.Select(y=> new ItemCarrito {Id=y.Id,Producto=y.Producto,Cantidad=y.Cantidad,Subtotal=y.Subtotal}).ToList()
+        }).ToList();
+
+    }
+
+    public void UpdateCarrito(Guid carritoid, CarritoCommandDto carritoDto)
     {
         var carrito = context.Carritos.FirstOrDefault(x => x.Id == carritoid);
         if (carrito != null)

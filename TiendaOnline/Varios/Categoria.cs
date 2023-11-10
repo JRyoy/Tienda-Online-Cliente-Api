@@ -14,7 +14,8 @@ public class Categoria
     [Required]
     [StringLength(100)]
     public string Descripcion { get; set; }= string.Empty;
-    List<Producto> Productos { get; set; }
+    public List<Producto> Productos { get; set; }
+
 
     public Categoria(string Nombre, string Descripcion)
     {

@@ -11,7 +11,7 @@ public class Carrito
     public Cliente Cliente { get; set; }
     [Required]
     public double Total { get; set; }
-    List<ItemCarrito> Productos { get; set; }
+    public List<ItemCarrito> Productos { get; set; }
 
     public Carrito() { }
 

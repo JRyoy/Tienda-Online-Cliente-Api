@@ -1,4 +1,6 @@
+using Api.Funcionalidades.Productos;
 using Api.Persistencia;
+using Microsoft.EntityFrameworkCore;
 using Varios;
 
 namespace Api.Funcionalidades.Categorias;
@@ -9,7 +11,7 @@ public interface ICategoriaService
     void CreateCategoria(CategoriaDto categoriaDto);
     void DaleteCategoria(Guid categoriaid);
     void Daleteproducto(Guid categoriaid, Guid productoid);
-    List<Categoria>GetCategoria();
+    List<CategoriaQueryDto>GetCategoria();
     void UpdateCategoria(Guid categoriaid, CategoriaDto categoriaDto);
 }
 public class CategoriaService:ICategoriaService
@@ -49,20 +51,26 @@ public class CategoriaService:ICategoriaService
 
     public void Daleteproducto(Guid categoriaid, Guid productoid)
     {
-         var categoria= context.Categorias.FirstOrDefault(x=>x.IdCategoria==categoriaid);
-        var producto = context.Productos.FirstOrDefault(x => x.Id ==productoid);
+        var categoria= context.Categorias.Where(x=>x.IdCategoria==categoriaid).Include(x => x.Productos).First();
+        var producto = categoria.Productos.FirstOrDefault(x => x.Id ==productoid);
         if(categoria !=null && producto!=null)
         {
-            context.Remove(producto);
+            categoria.Productos.Remove(producto);
             context.SaveChanges();
         }
     }
 
-    public List<Categoria>GetCategoria()
+    public List<CategoriaQueryDto>GetCategoria()
     {
-        return context.Categorias.ToList();
-    }
-
+        return context.Categorias.Include(x => x.Productos)
+        .Select(x=> new CategoriaQueryDto
+        {
+            Id=x.IdCategoria,
+            Nombre=x.Nombre,
+            Descripcion=x.Descripcion,
+            Productos = x.Productos.Select(y =>new ProductoQueryDto{Id=y.Id,Nombre=y.Nombre,Precio=y.Precio,Stock=y.Stock}).ToList()
+        }).ToList();
+    }   
     public void UpdateCategoria(Guid categoriaid, CategoriaDto categoriaDto)
     {
         var categoria= context.Categorias.FirstOrDefault(x=>x.IdCategoria==categoriaid);

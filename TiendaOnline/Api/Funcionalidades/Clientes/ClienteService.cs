@@ -43,11 +43,11 @@ public class ClienteService : IClienteService
 
     public void Deletecarrito(Guid clienteid, Guid carritoid)
     {
-        var cliente = context.Clientes.FirstOrDefault(x => x.Id == clienteid);
-        var carrito = context.Carritos.FirstOrDefault(x => x.Id == carritoid);
+        var cliente = context.Clientes.Where(x => x.Id == clienteid).Include(x => x.Id == carritoid).First();
+        var carrito = cliente.Carritos?.FirstOrDefault(x => x.Id == carritoid);
         if (cliente != null && carrito != null)
         {
-            context.Remove(carrito);
+            cliente.Carritos.Remove(carrito);
             context.SaveChanges();
         }
     }

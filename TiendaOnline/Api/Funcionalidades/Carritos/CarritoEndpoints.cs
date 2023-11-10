@@ -14,12 +14,12 @@ public class CarritoEndpoints : ICarterModule
             return Results.Ok(carritoService.GetCarrito());
         });
         
-        app.MapPost("/api/Carrito",([FromServices]ICarritoService carritoService,CarritoDto carritoDto)=>
+        app.MapPost("/api/Carrito",([FromServices]ICarritoService carritoService,CarritoCommandDto carritoDto)=>
         {
             carritoService.CreateCarrito(carritoDto);
             return Results.Ok();
         });
-        app.MapPut("/api/Carrito/{carritoid}",([FromServices]ICarritoService carritoService,CarritoDto carritoDto,Guid carritoid)=>
+        app.MapPut("/api/Carrito/{carritoid}",([FromServices]ICarritoService carritoService,CarritoCommandDto carritoDto,Guid carritoid)=>
         {
             carritoService.UpdateCarrito(carritoid,carritoDto);
             return Results.Ok();
@@ -34,6 +34,11 @@ public class CarritoEndpoints : ICarterModule
         app.MapPost("/api/Carrito/{carritoid}/itemcarrito/{itemcarritoid}",([FromServices]ICarritoService carritoService,Guid carritoid,Guid itemcarritoid)=>
         {
             carritoService.AddItemcarrito(carritoid,itemcarritoid);
+            return Results.Ok();
+        });
+        app.MapDelete("/api/Carrito/{carritoid}/itemcarrito/{itemcarritoid}/Delete",([FromServices]ICarritoService carritoService,Guid carritoid,Guid itemcarritoid)=>
+        {
+            carritoService.DeleteItemCarrito(carritoid,itemcarritoid);
             return Results.Ok();
         });
         #endregion
