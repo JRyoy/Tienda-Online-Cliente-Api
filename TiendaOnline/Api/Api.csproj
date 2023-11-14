@@ -3,7 +3,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <NoWarn>CS8602;CS8618</NoWarn>
+    <NoWarn>CS8602</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Carter" Version="7.2.0" />
