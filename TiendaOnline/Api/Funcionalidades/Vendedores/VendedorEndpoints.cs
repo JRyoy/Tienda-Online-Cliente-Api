@@ -33,10 +33,11 @@ public class VendedorEndpoints : ICarterModule
         #region ListProducto
 
         app.MapPost("/api/Vendedor/{vendedorid}/producto/{productoid}", ([FromServices] IVendedorService vendedorService, Guid vendedorid, Guid productoid) =>
-    {
-        vendedorService.Addproducto(vendedorid, productoid);
-        return Results.Ok();
-    });
+        {
+            vendedorService.Addproducto(vendedorid, productoid);
+            return Results.Ok();
+        });
+
         app.MapDelete("/api/Vendedor/{vendedorid}/producto/{productoid}/Delete", ([FromServices] IVendedorService vendedorService, Guid vendedorid, Guid productoid) =>
     {
         vendedorService.Deleteproducto(vendedorid, productoid);

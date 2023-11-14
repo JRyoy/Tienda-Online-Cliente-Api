@@ -5,10 +5,10 @@ public class ItemCarrito
 {
     [Key]
     [Required]
-    public Guid Id { get;  set; } = Guid.NewGuid();
+    public Guid Id { get; set; } = Guid.NewGuid();
 
     [Required]
-    
+
     public Producto Producto { get; set; }
     [Required]
     public int Cantidad { get; set; }

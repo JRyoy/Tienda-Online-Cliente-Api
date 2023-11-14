@@ -9,8 +9,8 @@ public class CarritoCommandDto
 }
 public class CarritoQueryDto
 {
-    public Guid Id { get;  set; }
-    public Cliente Cliente { get; set; }
+    public Guid Id { get; set; }
+    public Cliente Cliente { get; set; } 
     public double Total { get; set; }
-    public List<ItemCarrito> Productos { get; set; } =new List<ItemCarrito>();
+    public List<ItemCarrito> Productos { get; set; } = new List<ItemCarrito>();
 }
