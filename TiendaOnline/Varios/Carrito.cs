@@ -8,16 +8,17 @@ public class Carrito
     [Required]
     public Guid Id { get; protected set; } = Guid.NewGuid();
     [Required]
-    public Cliente Cliente { get; set; }
+    public Guid IdCliente { get; set; }
     [Required]
     public double Total { get; set; }
     public List<ItemCarrito> Productos { get; set; }
 
+
     public Carrito() { }
 
-    public Carrito(Cliente Cliente)
+    public Carrito(Guid IdCliente)
     {
-        this.Cliente = Cliente;
+        this.IdCliente = IdCliente;
         Productos = new List<ItemCarrito>();
         Total = 0;
     }

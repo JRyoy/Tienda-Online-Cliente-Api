@@ -33,7 +33,7 @@ public class CarritoService : ICarritoService
 
     public void CreateCarrito(CarritoCommandDto carritoDto)
     {
-        context.Carritos.Add(new Carrito(carritoDto.Cliente));
+        context.Carritos.Add(new Carrito(carritoDto.IdCliente));
         context.SaveChanges();
     }
 
@@ -64,7 +64,7 @@ public class CarritoService : ICarritoService
         .Select( x=>new CarritoQueryDto
         {
             Id=x.Id,
-            Cliente=x.Cliente,
+            IdCliente=x.IdCliente,
             Total=x.Total,
             Productos=x.Productos.Select(y=> new ItemCarrito {Id=y.Id,Producto=y.Producto,Cantidad=y.Cantidad,Subtotal=y.Subtotal}).ToList()
         }).ToList();
@@ -76,7 +76,7 @@ public class CarritoService : ICarritoService
         var carrito = context.Carritos.FirstOrDefault(x => x.Id == carritoid);
         if (carrito != null)
         {
-            carrito.Cliente = carritoDto.Cliente;
+            carrito.IdCliente = carritoDto.IdCliente;
         }
     }
 }
