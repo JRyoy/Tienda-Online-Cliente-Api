@@ -62,7 +62,7 @@ public class CarritoService : ICarritoService
 
     public List<CarritoQueryDto> GetCarrito()
     {
-        return context.Carritos.Include(x=>x.Productos)
+        var response = context.Carritos.Include(x => x.Productos).ThenInclude(x => x.Producto)
         .Select( x=>new CarritoQueryDto
         {
             Id=x.Id,
@@ -71,6 +71,7 @@ public class CarritoService : ICarritoService
             Productos = x.Productos.Select(y => new ItemCarritoQueryDto {Cantidad = y.Cantidad, Producto = new ProductoQueryDto { Id = y.Producto.Id, Nombre = y.Producto.Nombre} }).ToList()
         }).ToList();
 
+        return response;
     }
 
     public void UpdateCarrito(Guid carritoid, CarritoCommandDto carritoDto)
