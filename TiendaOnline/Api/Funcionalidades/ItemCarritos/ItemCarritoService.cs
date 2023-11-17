@@ -29,7 +29,7 @@ public  class ItemCarritoService : IItemCarritoService
 
     public void DeleteItemCarritos(Guid itemcarritoid)
     {
-        var itemCarrito=context.ItemCarritos.FirstOrDefault(x=>x.Id ==itemcarritoid);
+        var itemCarrito=context.ItemCarritos.FirstOrDefault(x=>x.IdItemCarrito == itemcarritoid);
         if(itemCarrito!=null)
         {
             context.Remove(itemCarrito);
@@ -49,7 +49,7 @@ public  class ItemCarritoService : IItemCarritoService
 
     public void UpdateItemCarritos(Guid itemcarritoid, ItemCarritoCommandDto itemCarritoDto)
     {
-        var itemCarrito = context.ItemCarritos.FirstOrDefault(x=>x.Id ==itemcarritoid);
+        var itemCarrito = context.ItemCarritos.FirstOrDefault(x=>x.IdItemCarrito == itemcarritoid);
         
         var producto = context.Productos.FirstOrDefault(x => x.Id == itemCarritoDto.IdProducto);
 

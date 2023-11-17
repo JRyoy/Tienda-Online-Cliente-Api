@@ -5,7 +5,7 @@ public class ItemCarrito
 {
     [Key]
     [Required]
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid IdItemCarrito { get; set; } = Guid.NewGuid();
 
     [Required]
 

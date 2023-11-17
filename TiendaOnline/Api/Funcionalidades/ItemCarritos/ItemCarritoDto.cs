@@ -10,6 +10,7 @@ public class ItemCarritoCommandDto
 }
 public class ItemCarritoQueryDto
 {
+    public Guid IdItemCarrito { get; set; }
     public required ProductoQueryDto Producto { get; set; }
     public int Cantidad { get; set; }
 }
