@@ -10,7 +10,7 @@ public class CategoriaDto
 }
 public class CategoriaQueryDto
 {   
-    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid Id { get; set; } 
     public required string Nombre{get; set;}
     public required string Descripcion{get; set;}
     public List<ProductoQueryDto> Productos { get; set; } = new List<ProductoQueryDto>();
