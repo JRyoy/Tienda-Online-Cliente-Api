@@ -46,7 +46,7 @@ public  class ItemCarritoService:IItemCarritoService
         var itemCarrito=context.ItemCarritos.FirstOrDefault(x=>x.Id ==itemcarritoid);
         if(itemCarrito!=null)
         {
-            itemCarrito.Producto=itemCarritoDto.Producto;
+            itemCarrito.Producto=itemCarritoDto.producto;
             itemCarrito.Cantidad=itemCarritoDto.Cantidad;
             context.SaveChanges();
         }

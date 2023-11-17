@@ -19,7 +19,7 @@ public class ItemCarrito
 
     public ItemCarrito(Producto producto, int cantidad)
     {
-        Producto = producto;
+        producto = producto;
         Cantidad = cantidad;
         Subtotal = producto.Precio * cantidad;
     }
