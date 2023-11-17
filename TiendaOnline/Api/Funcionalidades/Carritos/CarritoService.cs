@@ -1,3 +1,4 @@
+using Api.Funcionalidades.ItemCarritos;
 using Api.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Varios;
@@ -66,7 +67,7 @@ public class CarritoService : ICarritoService
             Id=x.Id,
             IdCliente=x.IdCliente,
             Total=x.Total,
-            Productos=x.Productos.Select(y=> new ItemCarrito {Id=y.Id,Producto=y.Producto,Cantidad=y.Cantidad,Subtotal=y.Subtotal}).ToList()
+            Productos = x.Productos.Select(y => new ItemCarritoDto {Id= y.Id,Cantidad=y.Cantidad,productoDto=y.ProductoDto }).ToList()
         }).ToList();
 
     }

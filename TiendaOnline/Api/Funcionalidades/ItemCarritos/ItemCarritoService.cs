@@ -20,7 +20,7 @@ public  class ItemCarritoService:IItemCarritoService
 
     }
 
-    public void CreateItemCarritos(ItemCarritoDto itemCarritoDto)
+    public void CreateItemCarritos(ItemCarrito itemCarritoDto)
     {
         context.ItemCarritos.Add(new ItemCarrito(itemCarritoDto.Producto,itemCarritoDto.Cantidad));
         context.SaveChanges();
