@@ -1,4 +1,5 @@
 using Api.Funcionalidades.ItemCarritos;
+using Api.Funcionalidades.Productos;
 using Api.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Varios;
@@ -50,9 +51,9 @@ public class CarritoService : ICarritoService
 
     public void DeleteItemCarrito(Guid carritoid, Guid itemcarritoid)
     {
-       var carrito = context.Carritos.Where(x => x.Id == carritoid).Include(x=>x.Productos).First();
+        var carrito = context.Carritos.Where(x => x.Id == carritoid).Include(x=>x.Productos).First();
         var itemCarrito = carrito.Productos.FirstOrDefault(x => x.Id == itemcarritoid);
-         if (carrito != null && itemCarrito != null)
+        if (carrito != null && itemCarrito != null)
         {
             carrito.Productos.Remove(itemCarrito);
             context.SaveChanges();
@@ -67,7 +68,7 @@ public class CarritoService : ICarritoService
             Id=x.Id,
             IdCliente=x.IdCliente,
             Total=x.Total,
-            Productos = x.Productos.Select(y => new ItemCarritoDto {Id= y.Id,Cantidad=y.Cantidad,productoDto=y.ProductoDto }).ToList()
+            Productos = x.Productos.Select(y => new ItemCarritoQueryDto {Cantidad = y.Cantidad, Producto = new ProductoQueryDto { Id = y.Producto.Id, Nombre = y.Producto.Nombre} }).ToList()
         }).ToList();
 
     }

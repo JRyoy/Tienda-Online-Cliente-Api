@@ -3,14 +3,13 @@ using Varios;
 
 namespace Api.Funcionalidades.ItemCarritos;
 
-public class ItemCarritoDto
+public class ItemCarritoCommandDto
 {
-    public required ProductoDto productoDto { get; set; }
-    public required int Cantidad { get; set; }
-    public ItemCarritoDto(ProductoDto productoDto,int Cantidad)
-    {
-        this.productoDto=productoDto;
-        this.Cantidad=Cantidad;
-    }
-
+    public Guid IdProducto { get; set; }
+    public int Cantidad { get; set; }
+}
+public class ItemCarritoQueryDto
+{
+    public required ProductoQueryDto Producto { get; set; }
+    public int Cantidad { get; set; }
 }

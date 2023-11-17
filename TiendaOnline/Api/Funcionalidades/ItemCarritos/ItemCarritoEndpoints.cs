@@ -12,12 +12,12 @@ public class ItemCarritoEndpoints : ICarterModule
             return Results.Ok(itemCarritoService.GetItemCarritos());
         });
 
-        app.MapPost("/api/itemCarrito", ([FromServices] IItemCarritoService itemCarritoService, ItemCarritoDto itemCarritoDto) =>
+        app.MapPost("/api/itemCarrito", ([FromServices] IItemCarritoService itemCarritoService, ItemCarritoCommandDto itemCarritoDto) =>
         {
             itemCarritoService.CreateItemCarritos(itemCarritoDto);
             return Results.Ok();
         });
-        app.MapPut("/api/itemCarrito/{itemcarritoid}", ([FromServices] IItemCarritoService itemCarritoService, ItemCarritoDto itemCarritoDto, Guid itemcarritoid) =>
+        app.MapPut("/api/itemCarrito/{itemcarritoid}", ([FromServices] IItemCarritoService itemCarritoService, ItemCarritoCommandDto itemCarritoDto, Guid itemcarritoid) =>
         {
             itemCarritoService.UpdateItemCarritos(itemcarritoid, itemCarritoDto);
             return Results.Ok();

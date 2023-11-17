@@ -14,8 +14,3 @@ public class ProductoQueryDto
     public double Precio { get; set; }
     public int Stock { get; set; }
 }
-public class ProductoDto
-{
-    public Guid Id { get; set; }
-    public int Cantidad { get; set; }
-}

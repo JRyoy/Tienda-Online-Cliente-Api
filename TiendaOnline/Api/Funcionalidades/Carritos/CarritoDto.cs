@@ -13,5 +13,5 @@ public class CarritoQueryDto
     public Guid Id { get; set; }
     public Guid IdCliente { get; set; }
     public double Total { get; set; }
-    public List<ItemCarritoDto> Productos { get; set; } = new List<ItemCarritoDto>();
+    public List<ItemCarritoQueryDto> Productos { get; set; } = new List<ItemCarritoQueryDto>();
 }
