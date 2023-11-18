@@ -67,6 +67,7 @@ public class ClienteService : IClienteService
         return context.Clientes.Include(x => x.Productos)
         .Select(x => new ClienteQueryDto
         {
+            Id = x.Id,
             Apellido = x.Apellido,
             Email = x.Email,
             Apodo = x.Apodo,

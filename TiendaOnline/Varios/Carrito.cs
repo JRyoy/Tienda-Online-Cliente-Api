@@ -23,17 +23,17 @@ public class Carrito
         Total = 0;
     }
 
-    public void AgregarProductos(Producto producto, int cantidad)
+    public void AgregarProductos(ItemCarrito itemCarrito)
     {
-        var itemProducto = Productos.SingleOrDefault(x => x.Producto.Id == producto.Id);
+        var itemProducto = Productos.SingleOrDefault(x => x.IdItemCarrito == itemCarrito.IdItemCarrito);
 
         if (itemProducto != null)
         {
-            itemProducto.Cantidad += cantidad;
+            itemProducto.Cantidad += itemCarrito.Cantidad;
             itemProducto.Subtotal = itemProducto.Producto.Precio * itemProducto.Cantidad;
         }
         else
-            Productos.Add(new ItemCarrito(producto, cantidad));
+            Productos.Add(itemCarrito);
 
         Total = Productos.Sum(x => x.Subtotal);
     }

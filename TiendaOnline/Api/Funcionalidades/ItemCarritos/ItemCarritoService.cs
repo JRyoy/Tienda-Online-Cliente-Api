@@ -40,6 +40,7 @@ public  class ItemCarritoService : IItemCarritoService
     public List<ItemCarritoQueryDto> GetItemCarritos()
     {
         return context.ItemCarritos.Select(x => new ItemCarritoQueryDto { 
+            IdItemCarrito = x.IdItemCarrito,
             Producto = new Productos.ProductoQueryDto { 
                 Id = x.Producto.Id, 
                 Nombre = x.Producto.Nombre, 

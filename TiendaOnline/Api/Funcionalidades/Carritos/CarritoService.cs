@@ -25,11 +25,12 @@ public class CarritoService : ICarritoService
 
     public void AddItemcarrito(Guid carritoid, Guid itemcarritoid)
     {
-        var carrito = context.Carritos.FirstOrDefault(x => x.Id == carritoid);
-        var itemCarrito = context.ItemCarritos.FirstOrDefault(x => x.IdItemCarrito == itemcarritoid);
+        var carrito = context.Carritos.Where(x => x.Id == carritoid).Include(x => x.Productos).First();
+        var itemCarrito = context.ItemCarritos.Where(x => x.IdItemCarrito == itemcarritoid).Include(x => x.Producto).First();
         if (carrito != null && itemCarrito != null)
         {
-            carrito.AgregarProductos(itemCarrito.Producto, itemCarrito.Cantidad);
+            carrito.AgregarProductos(itemCarrito);
+            context.SaveChanges();
         }
     }
 
